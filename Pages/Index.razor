@@ -1,0 +1,111 @@
+﻿@page "/"
+
+@using System.Dynamic
+
+<SfPivotView TValue="PivotProductDetails" Width="1500px" Height="300px">
+
+    <PivotViewDataSourceSettings TValue="PivotProductDetails">
+
+        <SfDataManager Url="https://bi.syncfusion.com/northwindservice/api/orders" Adaptor="Syncfusion.Blazor.Adaptors.WebApiAdaptor"></SfDataManager>
+        <PivotViewColumns>
+            <PivotViewColumn Name="ProductName"></PivotViewColumn>
+        </PivotViewColumns>
+        <PivotViewRows>
+            <PivotViewRow Name="ShipCountry"></PivotViewRow>
+            <PivotViewRow Name="ShipCity"></PivotViewRow>
+        </PivotViewRows>
+        <PivotViewValues>
+            <PivotViewValue Name="Quantity" Caption="Quantity"></PivotViewValue>
+            <PivotViewValue Name="UnitPrice" Caption="Unit Price"></PivotViewValue>
+        </PivotViewValues>
+
+        @*Rows, Columns and Values configuration for Expando and Dynamic objects data source*@
+
+        @*<PivotViewColumns>
+            <PivotViewColumn Name="OrderID"></PivotViewColumn>
+        </PivotViewColumns>
+        <PivotViewRows>
+            <PivotViewRow Name="CustomerID"></PivotViewRow>
+        </PivotViewRows>
+        <PivotViewValues>
+            <PivotViewValue Name="OrderDate"></PivotViewValue>
+            <PivotViewValue Name="Freight" "></PivotViewValue>
+        </PivotViewValues>*@
+
+
+    </PivotViewDataSourceSettings>
+    
+</SfPivotView>
+
+@code{
+
+    public class PivotProductDetails
+    {
+        public int Quantity { get; set; }
+        public double UnitPrice { get; set; }
+        public string ProductName { get; set; }
+        public string ShipCountry { get; set; }
+        public string ShipCity { get; set; }
+    }
+
+    /* Expando Object Data source */
+
+    //public List<ExpandoObject> Orders { get; set; } = new List<ExpandoObject>();
+
+    //protected override void OnInitialized()
+    //{
+    //    Orders = Enumerable.Range(1, 75).Select((x) =>
+    //    {
+    //        dynamic d = new ExpandoObject();
+    //        d.OrderID = 1000 + x;
+    //        d.CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)];
+    //        d.Freight = (new double[] { 2, 1, 4, 5, 3 })[new Random().Next(5)] * x;
+    //        d.OrderDate = (new DateTime[] { new DateTime(2010, 11, 5), new DateTime(2018, 10, 3), new DateTime(1995, 9, 9), new DateTime(2012, 8, 2), new DateTime(2015, 4, 11) })[new Random().Next(5)];
+
+    //        return d;
+    //    }).Cast<ExpandoObject>().ToList<ExpandoObject>();
+
+    //}
+
+    /* Dynamic Object Data source */
+
+    //public List<DynamicDictionary> Orders { get; set; } = new List<DynamicDictionary>();
+
+    //protected override void OnInitialized()
+    //{
+    //    Orders = Enumerable.Range(1, 75).Select((x) =>
+    //    {
+    //        dynamic d = new DynamicDictionary();
+    //        d.OrderID = 1000 + x;
+    //        d.CustomerID = (new string[] { "ALFKI", "ANANTR", "ANTON", "BLONP", "BOLID" })[new Random().Next(5)];
+    //        d.Freight = (new double[] { 2, 1, 4, 5, 3 })[new Random().Next(5)] * x;
+    //        d.OrderDate = (new DateTime[] { new DateTime(2010, 11, 5), new DateTime(2018, 10, 3), new DateTime(1995, 9, 9), new DateTime(2012, 8, 2), new DateTime(2015, 4, 11) })[new Random().Next(5)];
+
+    //        return d;
+    //    }).Cast<DynamicDictionary>().ToList<DynamicDictionary>();
+
+    //}
+
+    //public class DynamicDictionary : DynamicObject
+    //{
+    //    Dictionary<string, object> dictionary = new Dictionary<string, object>();
+
+    //    public override bool TryGetMember(GetMemberBinder binder, out object result)
+    //    {
+    //        string name = binder.Name;
+    //        return dictionary.TryGetValue(name, out result);
+    //    }
+    //    public override bool TrySetMember(SetMemberBinder binder, object value)
+    //    {
+    //        dictionary[binder.Name] = value;
+    //        return true;
+    //    }
+
+    //    public override System.Collections.Generic.IEnumerable<string> GetDynamicMemberNames()
+    //    {
+    //        return this.dictionary?.Keys;
+    //    }
+    //}
+
+
+}    
